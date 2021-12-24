@@ -1,3 +1,19 @@
+@font-face {
+    font-family: "GothamPro";
+    src: url('./fonts/gothampro/GothamPro/GothamPro.ttf') format("truetype");
+}
+@font-face {
+    font-family: "GothamProB";
+    src: url('./fonts/gothampro/GothamPro-Bold/GothamPro-Bold.ttf') format("truetype");
+}
+@font-face {
+    font-family: "GothamProL";
+    src: url('./fonts/gothampro/GothamPro-Light/GothamPro-Light.ttf') format("truetype");
+}
+@font-face {
+    font-family: "GothamProM";
+    src: url('./fonts/gothampro/GothamPro-Medium/GothamPro-Medium.ttf') format("truetype");
+}
 * {
     margin: 0;
     padding: 0;
@@ -42,18 +58,17 @@ body {
 }
 .container {
     width: 200px;
-}
-.container > div {
-    margin-bottom: 10px;
+    font-family: GothamProl;
 }
 .card-city {
-
+    margin-bottom: 10px;
 }
 .card-condition {
-    font-size: 30px;
+    margin-bottom: 10px;
+    font-size: 40px;
 }
 .card-ico {
-
+    margin-bottom: 10px;
 }
 .card-info {
     font-size: 18px;
