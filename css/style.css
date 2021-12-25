@@ -20,7 +20,7 @@
     box-sizing: border-box;
 }
 div {
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 body {
     background-color: #091f43;
@@ -59,16 +59,23 @@ body {
 .container {
     width: 200px;
     font-family: GothamProl;
+    position: relative;
 }
 .card-city {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 .card-condition {
-    margin-bottom: 10px;
+    margin-bottom: 130px;
     font-size: 40px;
 }
 .card-ico {
     margin-bottom: 10px;
+    position: absolute;
+    right: -25px;
+    top: 27px;
+}
+.card-img {
+    height: 200px;
 }
 .card-info {
     font-size: 18px;
