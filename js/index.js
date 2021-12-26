@@ -36,16 +36,16 @@ class AddCard {
 		div.innerHTML = `
 			<div class="container">
 				<div class="card-city">
-					<span>Устюжна тест</span>
+					<span>${this.cityName}</span>
 				</div>
 				<div class="card-condition">
-					<span>19</span>
+					<span>${cityCondition}</span>
 				</div>
 				<div class="card-ico">
 					<img class="card-img" src="./file/img/img.png" alt="img">
 				</div>
 				<div class="card-info">
-					<span>Сегодня прохладно</span>
+					<span>${cityInfo}</span>
 				</div>
 			</div>
 		`;
