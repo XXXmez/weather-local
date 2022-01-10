@@ -41,15 +41,36 @@ body {
     /* Пусто */
 }
 .city {
-    /* Пусто */
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.input-city {
+    line-height: 40px;
+    border: 0;
+    outline: none;
+    padding: 5px 60px 5px 20px;
+    border-radius: 25px;
+    width: 100%;
+    font-size: 18px;
+}
+.input-city::placeholder {
+    font-size: 18px;
+}
+.city-btn {
+    position: absolute;
+    right: 40px;
+    width: 40px;
+    height: 40px;
 }
 .cards-weather {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
 }
 .card {
-    margin: 0 20px 20px 0;
+    /* margin: 0 20px 20px 0; */
     padding: 45px 40px;
     background-color: #fff;
     color: #1e2432;

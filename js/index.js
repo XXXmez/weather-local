@@ -2,26 +2,14 @@ const cards = document.querySelectorAll('.card'),
 	  cardCity = document.querySelectorAll('.card-city'),
 	  cardCondition = document.querySelectorAll('.card-condition'),
 	  cardInfo = document.querySelectorAll('.card-info'),
-	  cardsWeather = document.querySelector('.cards-weather');
+	  cardsWeather = document.querySelector('.cards-weather'),
+	  inputCity = document.querySelector('.input-city'),
+	  cityBtn = document.querySelector('.city-btn');
 
-let nameCity = 'Устюжна';									// city name
-const apiKey = '8de2150d7778bff876218c6b8d98f4f0';			// api key
+// let nameCity = 'Устюжна';									// city name
+const apiKey = '8de2150d7778bff876218c6b8d98f4f0';				// api key
 
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=${nameCity}&appid=${apiKey}&lang=ru`)
-.then(resp => {
-	return resp.json();
-})
-.then(data => {
-    console.log(data);
-	cardCity[0].textContent = data.name;
-	cardInfo[0].textContent = data.weather[0].description;
-	cardCondition[0].textContent = Math.floor(data.main.temp - 273);
-})
-.catch(err => {
-	console.error(err);
-});
-
-// 
+// Класс создания карточек
 class AddCard {
 	constructor (cityName, cityCondition, cityInfo) {
 		this.cityName = cityName;
@@ -39,13 +27,13 @@ class AddCard {
 					<span>${this.cityName}</span>
 				</div>
 				<div class="card-condition">
-					<span>${cityCondition}</span>
+					<span>${this.cityCondition}</span>
 				</div>
 				<div class="card-ico">
 					<img class="card-img" src="./file/img/img.png" alt="img">
 				</div>
 				<div class="card-info">
-					<span>${cityInfo}</span>
+					<span>${this.cityInfo}</span>
 				</div>
 			</div>
 		`;
@@ -59,13 +47,27 @@ function cardsCreate(city) {
 		return resp.json();
 	})
 	.then(data => {
-		console.log(data);
-		cardCity[0].textContent = data.name;
-		cardInfo[0].textContent = data.weather[0].description;
-		cardCondition[0].textContent = Math.floor(data.main.temp - 273);
+		// console.log(data);
+
+		//cardCity[0].textContent = data.name;
+		//cardInfo[0].textContent = data.weather[0].description;
+		//cardCondition[0].textContent = Math.floor(data.main.temp - 273);
+
+		let [name, description, temp] = [data.name, data.weather[0].description, Math.floor(data.main.temp - 273)];
+
+		console.log(name, description, temp);
+		new AddCard(name, temp, description).createCard();
 	})
 	.catch(err => {
 		console.error(err);
 	});
-	}
-//cardsCreate('Устюжна');
+};
+
+cardsCreate('Устюжна');
+
+
+
+cityBtn.addEventListener('click', () => {
+	console.log(inputCity.value);
+	cardsCreate(inputCity.value);
+})	
