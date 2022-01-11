@@ -19,9 +19,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-div {
-/*     border: 1px solid red; */
-}
+/* div {
+    border: 1px solid red;
+} */
 body {
     background-color: #091f43;
     color: #ffffff;
@@ -38,7 +38,7 @@ body {
     padding: 10px;
 }
 .title-page {
-    /* Пусто */
+    font-family: 'GothamPro';
 }
 .city {
     position: relative;
@@ -60,8 +60,14 @@ body {
 .city-btn {
     position: absolute;
     right: 40px;
-    width: 40px;
-    height: 40px;
+    display: flex;
+    border: 0;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+}
+.city-btn:hover {
+    filter: invert(57%) sepia(37%) saturate(5166%) hue-rotate(198deg) brightness(101%) contrast(101%);
 }
 .cards-weather {
     display: flex;

@@ -46,11 +46,10 @@ function cardsCreate(city) {
 		return resp.json();
 	})
 	.then(data => {
-		// console.log(data);
-
-		//cardCity[0].textContent = data.name;
-		//cardInfo[0].textContent = data.weather[0].description;
-		//cardCondition[0].textContent = Math.floor(data.main.temp - 273);
+		//	console.log(data);
+		//	cardCity[0].textContent = data.name;
+		//	cardInfo[0].textContent = data.weather[0].description;
+		//	cardCondition[0].textContent = Math.floor(data.main.temp - 273);
 
 		let [name, description, temp] = [data.name, data.weather[0].description, Math.floor(data.main.temp - 273)];
 
@@ -61,10 +60,17 @@ function cardsCreate(city) {
 		console.error(err);
 	});
 };
-
 cardsCreate('Устюжна');
 
-cityBtn.addEventListener('click', () => {
+cityBtn.addEventListener('click', citySearch)
+inputCity.addEventListener("keydown", (e) => {
+	if(e.key == 'Enter') {
+		citySearch()
+	}
+})
+
+// Функция убирает лишние пробелы до и после города, проверяет есть ли в карточках уже такой же город
+function citySearch(){
 	if(inputCity.value) {
 		let city = inputCity.value.replace(/(^\s*)|(\s*$)/g, '');
 		let arrCity = document.querySelectorAll('.card-city span');
@@ -73,15 +79,14 @@ cityBtn.addEventListener('click', () => {
 		
 		arrCity.forEach((e,i) => {
 			// console.log("e:", e.innerText, "i:", i);
-			if (city == e.innerText) {
+			if (city.toLowerCase() == e.innerText.toLowerCase()) {
 				examination = false;
 			}
 		});
 
 		if (examination){
-			// console.log(arrCity);
+			// console.log("arrCity: ", arrCity);
 			cardsCreate(city);
 		}
-		
 	}
-})
+}
