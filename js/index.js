@@ -15,7 +15,6 @@ class AddCard {
 		this.cityName = cityName;
 		this.cityCondition = cityCondition;
 		this.cityInfo = cityInfo;
-
 	}
 
 	createCard () {
@@ -65,9 +64,24 @@ function cardsCreate(city) {
 
 cardsCreate('Устюжна');
 
-
-
 cityBtn.addEventListener('click', () => {
-	console.log(inputCity.value);
-	cardsCreate(inputCity.value);
-})	
+	if(inputCity.value) {
+		let city = inputCity.value.replace(/(^\s*)|(\s*$)/g, '');
+		let arrCity = document.querySelectorAll('.card-city span');
+		let examination = true;
+		// console.log(city);
+		
+		arrCity.forEach((e,i) => {
+			// console.log("e:", e.innerText, "i:", i);
+			if (city == e.innerText) {
+				examination = false;
+			}
+		});
+
+		if (examination){
+			// console.log(arrCity);
+			cardsCreate(city);
+		}
+		
+	}
+})
