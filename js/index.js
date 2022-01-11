@@ -1,10 +1,11 @@
-const cards = document.querySelectorAll('.card'),
-	  cardCity = document.querySelectorAll('.card-city'),
+const cardCity = document.querySelectorAll('.card-city'),
 	  cardCondition = document.querySelectorAll('.card-condition'),
 	  cardInfo = document.querySelectorAll('.card-info'),
 	  cardsWeather = document.querySelector('.cards-weather'),
 	  inputCity = document.querySelector('.input-city'),
 	  cityBtn = document.querySelector('.city-btn');
+
+let cards = document.querySelectorAll('.card');
 
 // let nameCity = 'Устюжна';									// city name
 const apiKey = '8de2150d7778bff876218c6b8d98f4f0';				// api key
@@ -37,6 +38,8 @@ class AddCard {
 			</div>
 		`;
 		cardsWeather.append(div);
+		cards = document.querySelectorAll('.card');
+		inputCity.value = '';
 	}
 }
 
@@ -81,6 +84,11 @@ function citySearch(){
 			// console.log("e:", e.innerText, "i:", i);
 			if (city.toLowerCase() == e.innerText.toLowerCase()) {
 				examination = false;
+				console.log(i);
+				cards[i].classList.add('copy')
+				setTimeout(() => {
+					cards[i].classList.remove('copy')
+				}, 1000)
 			}
 		});
 

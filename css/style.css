@@ -25,6 +25,10 @@
 body {
     background-color: #091f43;
     color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
 }
 .main {
     padding-top: 50px;
@@ -77,11 +81,16 @@ body {
 }
 .card {
     /* margin: 0 20px 20px 0; */
-    padding: 45px 40px;
+    padding: 40px 40px;
     background-color: #fff;
     color: #1e2432;
     border-radius: 20px;
     font-size: 24px;
+    border: 5px solid #fff;
+    transition: .5s ease-in-out;
+}
+.card.copy {
+    border: 5px solid red;
 }
 .container {
     width: 200px;
@@ -106,4 +115,21 @@ body {
 }
 .card-info {
     font-size: 18px;
+}
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.link-github {
+    margin: 5px 0;
+    padding: 5px 0;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    font-family: 'GothamProL';
+    transition: .3s;
+}
+.link-github:hover {
+    color: #3ebfb9;
 }
