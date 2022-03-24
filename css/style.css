@@ -82,11 +82,11 @@ body {
 .card {
     /* margin: 0 20px 20px 0; */
     padding: 40px 40px;
-    background-color: #fff;
+    background-color: #c0cadb;
     color: #1e2432;
     border-radius: 20px;
     font-size: 24px;
-    border: 5px solid #fff;
+    border: 5px solid #606b7c;
     transition: .5s ease-in-out;
 }
 .card.copy {
@@ -111,7 +111,7 @@ body {
     top: 27px;
 }
 .card-img {
-    height: 200px;
+    height: 50px;
 }
 .card-info {
     font-size: 18px;
@@ -133,3 +133,36 @@ body {
 .link-github:hover {
     color: #3ebfb9;
 }
+
+.modal {
+    padding: 0 20px;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: #06061ec4;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-window {
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 11px 1px black;
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+}
+.modal-title {
+    padding: 20px;
+    border-bottom: 1px solid gray;
+}
+.modal-text {
+    padding: 20px;
+}
+/* .modal-code {
+}
+.modal-message {
+} */
