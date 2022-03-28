@@ -12,23 +12,29 @@ const apiKey = '8de2150d7778bff876218c6b8d98f4f0';				// api key
 
 // Класс создания карточек
 class AddCard {
-	constructor (cityName, cityCondition, cityInfo, cityIcon) {
+	constructor (cityName, cityCondition, cityInfo, cityIcon, id) {
 		this.cityName = cityName;
 		this.cityCondition = cityCondition;
 		this.cityInfo = cityInfo;
 		this.cityIcon = cityIcon;
+		this.id = id;
 	}
 
 	createCard () {
-		const div = document.createElement('div');
+		const div = document.createElement('div'),
+			divClose = document.createElement('div');
+
 		div.classList.add('card');
+		divClose.classList.add('card-close');
+
+		divClose.innerHTML = `<span>Close</span>`;
 		div.innerHTML = `
 			<div class="container">
 				<div class="card-city">
 					<span>${this.cityName}</span>
 				</div>
 				<div class="card-condition">
-					<span>${this.cityCondition}</span>
+					<span>${this.cityCondition}° C</span>
 				</div>
 				<div class="card-ico">
 					<img class="card-img" src='http://openweathermap.org/img/wn/${this.cityIcon}.png' alt="weather-icon">
@@ -38,13 +44,18 @@ class AddCard {
 				</div>
 			</div>
 		`;
-		div.addEventListener('dblclick', (element) => {
-			//console.log(element.target);
+
+		div.querySelector('.container').append(divClose);
+		
+		divClose.addEventListener('click', () => {
 			div.parentNode.removeChild(div)
-		})
+		});
+
 		cardsWeather.append(div);
-		cards = document.querySelectorAll('.card');
+
 		inputCity.value = '';
+
+		localStorage.setItem(this.id, this.cityName);
 	}
 }
 
@@ -67,30 +78,60 @@ function createModal(code='',message='') {
 		modal.parentNode.removeChild(modal)
 	})
 	body.append(modal);
+
+	inputCity.blur()
+}
+
+function checkLocalStorage() {
+	if (localStorage.length > 0) {
+		Object.values(localStorage).forEach(e => cardsCreate(e))
+	} else {
+		cardsCreate('Устюжна');
+	}
 }
 
 function cardsCreate(city) {
 	fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=en`)
 	.then(resp => {
-		// if (resp.status == 200) 
 		return resp.json();
 	})
 	.then(data => {
-		// console.log('data: ', data);
-		if (data.cod == 200) {
-			let [name, description, temp, icon] = [data.name, data.weather[0].description, Math.floor(data.main.temp - 273), data.weather[0].icon];
-			// console.log(name, " , ", description, " , ", temp, " , ", icon);
-			new AddCard(name, temp, description, icon).createCard();
-		} else {
-			console.log(data.cod, data.message);
-			createModal(data.cod, data.message)
+		// console.log(data);
+		const list = document.querySelectorAll('.card-city span');
+		const listArray = Array.from(list);
+
+		function addL() {
+			if (data.cod == 200) {
+				let [name, description, temp, icon, id] = [data.name, data.weather[0].description, Math.floor(data.main.temp - 273), data.weather[0].icon, data.id];
+				// console.log(name, " , ", description, " , ", temp, " , ", icon);
+				new AddCard(name, temp, description, icon, id).createCard();
+			} else {
+				//console.log(data.cod, data.message);
+				createModal(data.cod, data.message)
+			}
 		}
+		
+		if (list.length == 0) {
+			addL()
+		} else {
+			const seachElem = listArray.filter(e => {
+				return e.innerText == data.name;
+			})
+			if (seachElem.length == 0) {
+				addL()
+			} else if (seachElem.length > 0) {
+				createModal('1', "Такой город уже есть")
+			} else {
+				console.error('Error NONE');
+			}
+		}
+
+		//console.log('data: ', data);
 	})
 	.catch(err => {
 		console.error('error: ', err);
 	});
 };
-cardsCreate('Устюжна');
 
 // cityBtn.addEventListener('click', citySearch)
 
@@ -101,6 +142,41 @@ inputCity.addEventListener("keydown", (event) => {
 		cardsCreate(city)
 	}
 })
+
+checkLocalStorage()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -80,8 +80,7 @@ body {
     gap: 20px;
 }
 .card {
-    /* margin: 0 20px 20px 0; */
-    padding: 40px 40px;
+    padding: 40px 40px 30px 40px;
     background-color: #c0cadb;
     color: #1e2432;
     border-radius: 20px;
@@ -116,6 +115,27 @@ body {
 .card-info {
     font-size: 18px;
 }
+.card-close {
+    margin-top: 15px;
+    text-align: center;
+    user-select: none;
+    opacity: .1;
+    transition: .3s;
+}
+.card-close span {
+    display: inline-block;
+    background: #a56767;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.card:hover .card-close {
+    opacity: 1;
+}
+.card-close:hover {
+    cursor: pointer;
+}
+
 .footer {
     display: flex;
     justify-content: center;
