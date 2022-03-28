@@ -6,8 +6,6 @@ const cardCity = document.querySelectorAll('.card-city'),
 	  cityBtn = document.querySelector('.city-btn'),
 	  body = document.querySelector('body');
 
-let cards = document.querySelectorAll('.card');
-
 const apiKey = '8de2150d7778bff876218c6b8d98f4f0';				// api key
 
 // Класс создания карточек
@@ -47,7 +45,8 @@ class AddCard {
 
 		div.querySelector('.container').append(divClose);
 		
-		divClose.addEventListener('click', () => {
+		divClose.addEventListener('click', (e) => {
+			deletelocal(this.cityName);
 			div.parentNode.removeChild(div)
 		});
 
@@ -55,7 +54,7 @@ class AddCard {
 
 		inputCity.value = '';
 
-		localStorage.setItem(this.id, this.cityName);
+		savelocal(this.cityName)
 	}
 }
 
@@ -83,11 +82,27 @@ function createModal(code='',message='') {
 }
 
 function checkLocalStorage() {
-	if (localStorage.length > 0) {
-		Object.values(localStorage).forEach(e => cardsCreate(e))
-	} else {
+	if (localStorage.getItem('saveLocal') == null) {
 		cardsCreate('Устюжна');
+	} else {
+		localStorage.getItem('saveLocal').split(',').forEach(e => cardsCreate(e))
 	}
+}
+
+function savelocal(local){
+	if (localStorage.getItem('saveLocal') == null) {
+		localStorage.setItem('saveLocal', local)
+	} else if (localStorage.getItem('saveLocal') && localStorage.getItem('saveLocal').split(',').indexOf(local) < 0) {
+		const arrSaveLocal = [];
+		arrSaveLocal.push(localStorage.getItem('saveLocal'), local)
+		localStorage.setItem('saveLocal', arrSaveLocal)
+	}
+}
+
+function deletelocal(local){
+	const newArrSaveLocal = [...localStorage.getItem('saveLocal').split(',')];
+	newArrSaveLocal.splice(localStorage.getItem('saveLocal').split(',').indexOf(local), 1);
+	localStorage.setItem('saveLocal', newArrSaveLocal)
 }
 
 function cardsCreate(city) {
@@ -103,7 +118,6 @@ function cardsCreate(city) {
 		function addL() {
 			if (data.cod == 200) {
 				let [name, description, temp, icon, id] = [data.name, data.weather[0].description, Math.floor(data.main.temp - 273), data.weather[0].icon, data.id];
-				// console.log(name, " , ", description, " , ", temp, " , ", icon);
 				new AddCard(name, temp, description, icon, id).createCard();
 			} else {
 				//console.log(data.cod, data.message);
