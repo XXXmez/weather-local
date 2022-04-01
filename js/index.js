@@ -151,12 +151,18 @@ function cardsCreate(city) {
 
 // cityBtn.addEventListener('click', citySearch)
 
+function citySearch(){
+	let city = inputCity.value.replace(/(^\s*)|(\s*$)/g, '');
+	cardsCreate(city)
+}
+
 inputCity.addEventListener("keydown", (event) => {
 	if(event.key == 'Enter') {
-		// citySearch()
-		let city = inputCity.value.replace(/(^\s*)|(\s*$)/g, '');
-		cardsCreate(city)
+		citySearch()
 	}
+})
+cityBtn.addEventListener('click', () => {
+	citySearch()
 })
 
 checkLocalStorage()
