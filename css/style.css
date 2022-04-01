@@ -141,6 +141,9 @@ body {
     justify-content: center;
     align-items: center;
 }
+.footter-logo {
+    height: 40px;
+}
 .link-github {
     margin: 5px 0;
     padding: 5px 0;
@@ -149,6 +152,9 @@ body {
     text-decoration: none;
     font-family: 'GothamProL';
     transition: .3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .link-github:hover {
     color: #3ebfb9;
@@ -178,11 +184,31 @@ body {
 .modal-title {
     padding: 20px;
     border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-title > h4 {
+    line-height: 29px;
+}
+.modal-close {
+    width: 20px;
+    height: 20px;
+    fill: #606b7c;
+}
+.modal-close > svg{
+    width: 100%;
+    height: 100%;
+}
+.modal-close:hover {
+    fill: #000;
 }
 .modal-text {
     padding: 20px;
 }
-/* .modal-code {
+.modal-code {
+    margin-bottom: 10px;
 }
 .modal-message {
-} */
+    margin-bottom: 10px;
+}
