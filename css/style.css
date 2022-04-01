@@ -220,7 +220,7 @@ body {
         padding-bottom: 35px;
     }
     .content > div {
-        padding: 20px;
+        padding: 5px 20px 10px;
     }
     .card-close {
         opacity: 1;
