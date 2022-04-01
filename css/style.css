@@ -54,9 +54,10 @@ body {
     border: 0;
     outline: none;
     padding: 5px 60px 5px 20px;
-    border-radius: 25px;
+    border-radius: 15px;
     width: 100%;
     font-size: 18px;
+    background-color: #ffffffc9;
 }
 .input-city::placeholder {
     font-size: 18px;
@@ -211,4 +212,20 @@ body {
 }
 .modal-message {
     margin-bottom: 10px;
+}
+
+@media (max-width:990px) {
+    .main {
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+    .content > div {
+        padding: 20px;
+    }
+    .card-close {
+        opacity: 1;
+    }
+    .card-close span {
+        background-color: #976d6d;
+    }
 }
