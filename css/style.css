@@ -101,11 +101,15 @@ body {
     margin-bottom: 30px;
 }
 .card-condition {
-    margin-bottom: 130px;
+    /* margin-bottom: 130px; */
     font-size: 40px;
+    margin-bottom: 20px;
+}
+.card-feels-like, .card-humidity, .card-wind {
+    margin-bottom: 5px;
+    font-size: 18px;
 }
 .card-ico {
-    margin-bottom: 10px;
     position: absolute;
     right: -25px;
     top: 27px;
@@ -227,5 +231,9 @@ body {
     }
     .card-close span {
         background-color: #976d6d;
+    }
+    .card-feels-like, .card-humidity, .card-wind {
+        margin-bottom: 5px;
+        font-size: 16px;
     }
 }

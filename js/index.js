@@ -10,12 +10,15 @@ const apiKey = '8de2150d7778bff876218c6b8d98f4f0';				// api key
 
 // Класс создания карточек
 class AddCard {
-	constructor (cityName, cityCondition, cityInfo, cityIcon, id) {
+	constructor (cityName, cityCondition, cityInfo, cityIcon, id, feelsLike, humidity, speed) {
 		this.cityName = cityName;
 		this.cityCondition = cityCondition;
 		this.cityInfo = cityInfo;
 		this.cityIcon = cityIcon;
 		this.id = id;
+		this.feelsLike = feelsLike;
+		this.humidity = humidity;
+		this.speed = speed;
 	}
 
 	createCard () {
@@ -33,6 +36,15 @@ class AddCard {
 				</div>
 				<div class="card-condition">
 					<span>${this.cityCondition}° C</span>
+				</div>
+				<div class="card-feels-like">
+					<span>Feels like </span><span>${this.feelsLike}° C</span>
+				</div>
+				<div class="card-humidity">
+					<span>Humidity </span><span>${this.humidity}%</span>
+				</div>
+				<div class="card-wind">
+					<span>Wind </span><span>${this.speed} m/s</span>
 				</div>
 				<div class="card-ico">
 					<img class="card-img" src='http://openweathermap.org/img/wn/${this.cityIcon}.png' alt="weather-icon">
@@ -84,9 +96,9 @@ function createModal(code='',message='') {
 
 function checkLocalStorage() {
 	if (localStorage.getItem('saveLocal') == null) {
-		cardsCreate('Устюжна');
+		cardsCreate('Sevastopol');
 	} else {
-		localStorage.getItem('saveLocal').split(',').forEach(e => cardsCreate(e))
+		localStorage.getItem('saveLocal').split(',').forEach(e => cardsCreate(e));
 	}
 }
 
@@ -95,8 +107,8 @@ function savelocal(local){
 		localStorage.setItem('saveLocal', local)
 	} else if (localStorage.getItem('saveLocal') && localStorage.getItem('saveLocal').split(',').indexOf(local) < 0) {
 		const arrSaveLocal = [];
-		arrSaveLocal.push(localStorage.getItem('saveLocal'), local)
-		localStorage.setItem('saveLocal', arrSaveLocal)
+		arrSaveLocal.push(localStorage.getItem('saveLocal'), local);
+		localStorage.setItem('saveLocal', arrSaveLocal);
 	}
 }
 
@@ -119,8 +131,8 @@ function cardsCreate(city) {
 
 		function addL() {
 			if (data.cod == 200) {
-				let [name, description, temp, icon, id] = [data.name, data.weather[0].description, Math.floor(data.main.temp - 273), data.weather[0].icon, data.id];
-				new AddCard(name, temp, description, icon, id).createCard();
+				let [name, description, temp, icon, id, feelsLike, humidity, speed] = [data.name, data.weather[0].description, Math.floor(data.main.temp - 273), data.weather[0].icon, data.id, Math.floor(data.main.feels_like - 273), data.main.humidity, data.wind.speed];
+				new AddCard(name, temp, description, icon, id, feelsLike, humidity, speed).createCard();
 			} else {
 				//console.log(data.cod, data.message);
 				createModal(data.cod, data.message)
@@ -136,20 +148,16 @@ function cardsCreate(city) {
 			if (seachElem.length == 0) {
 				addL()
 			} else if (seachElem.length > 0) {
-				createModal('1', "Такой город уже есть")
+				createModal('1', "This city already exists")
 			} else {
 				console.error('Error NONE');
 			}
 		}
-
-		//console.log('data: ', data);
 	})
 	.catch(err => {
 		console.error('error: ', err);
 	});
 };
-
-// cityBtn.addEventListener('click', citySearch)
 
 function citySearch(){
 	let city = inputCity.value.replace(/(^\s*)|(\s*$)/g, '');
