@@ -156,6 +156,7 @@ function cardsCreate(city) {
 	})
 	.catch(err => {
 		console.error('error: ', err);
+		createModal('ERROR', 'The server is not responding. \nTry using a VPN.');
 	});
 };
 
@@ -176,7 +177,7 @@ cityBtn.addEventListener('click', () => {
 checkLocalStorage()
 
 
-
+console.log('If it doesn\'t work for you, use a VPN');
 
 
 
